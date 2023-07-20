@@ -85,3 +85,41 @@ Table: RoomAmenity
 
 In this ERD diagram, we have identified primary keys, foreign keys, composite keys, and the relationships between tables. The Hotel table has a one-to-many relationship with the RoomLocation table (one hotel can have multiple room locations), and the Room table has a one-to-many relationship with the RoomAmenity table (one room can have multiple amenities). Additionally, the Hotel table has a one-to-many relationship with the RoomLocation table through the LocationID.
 
+---
+
+## Introduction to your web app
+
+The Async Inn Hotel Asset Management System is a web-based API that assists Async Inn, a local hotel chain, in efficiently managing their hotel assets at various locations. The project's primary goal is to create a RESTful API server, enabling the management of rooms, amenities, and the addition of new hotel locations. The system utilizes a relational database to store and ensure data integrity.
+
+## Relations between tables
+
+**Hotel table:**
+
+* LocationID (Primary Key) uniquely identifies each hotel.
+* Each hotel has a Name, City, State, Address, and PhoneNumber.
+
+**RoomLocation table:**
+
+* The LocationID (Foreign Key to Location) links to the Hotel table, indicating which hotel the room is in.
+* The RoomNumber (Foreign Key to Room) links to the Room table, indicating the specific room within the hotel.
+* The combination of LocationID and RoomNumber forms a Composite Primary Key, ensuring uniqueness.
+* The price column represents the price of that particular room at the given location.
+
+**Amenity table:**
+
+* AmenityID (Primary Key) uniquely identifies each amenity.
+* Each amenity has a Name and Description.
+
+**Room table:**
+
+* RoomNumber (Primary Key) uniquely identifies each room within the system.
+* The layout column may store information about the room's physical layout (e.g., single, double, suite).
+* The Nickname column might be used to give the room a custom name.
+* The IsPetFriendly column indicates whether the room is pet-friendly or not.
+* The Enm column appears to represent an enumeration, with values 0, 1, or 3, corresponding to different room types (e.g., studio, one-bedroom, two-bedroom).
+
+**RoomAmenity table:**
+
+* The RoomNumber (Foreign Key to Room) links to the Room table, specifying which room the amenity is associated with.
+* The AmenityID (Foreign Key to Amenity) links to the Amenity table, specifying which amenity is associated with the room.
+* The combination of RoomNumber and AmenityID forms a Composite Primary Key, ensuring uniqueness.

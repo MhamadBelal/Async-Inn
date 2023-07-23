@@ -123,3 +123,15 @@ The Async Inn Hotel Asset Management System is a web-based API that assists Asyn
 * The RoomNumber (Foreign Key to Room) links to the Room table, specifying which room the amenity is associated with.
 * The AmenityID (Foreign Key to Amenity) links to the Amenity table, specifying which amenity is associated with the room.
 * The combination of RoomNumber and AmenityID forms a Composite Primary Key, ensuring uniqueness.
+
+---
+
+## Repository Design Pattern in Hotel Management Application
+
+### Architecture Pattern: Repository Design Pattern
+
+The Repository Design Pattern is a widely used architectural pattern that helps in separating the business logic from the data access layer in an application. It provides an abstraction layer between the application and the data source (e.g., a database or an external service), allowing the application to interact with data without having to know the underlying implementation details. The pattern promotes a clean and maintainable codebase by organizing data access operations in a central repository.
+
+### How it is used in the Hotel Management Application:
+
+In the Hotel Management Application, the Repository Design Pattern is employed to handle the data access operations for entities such as Hotel, Amenity, and Room. The pattern is implemented using the IbaseRepo interface, which contains the CRUD (Create, GetAll, GetbyId, Update, Delete) operations that all repositories for different entities must implement. Each entity (Hotel, Amenity, and Room) has its own repository class that implements the IbaseRepo interface, providing specific implementations for interacting with the data source.

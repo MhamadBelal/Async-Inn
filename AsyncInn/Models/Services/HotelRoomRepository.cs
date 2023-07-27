@@ -30,7 +30,7 @@ namespace AsyncInn.Models.Services
 
         public async Task<List<HotelRoom>> GetAll(int hotelId)
         {
-            var hotelRooms = await _context.HotelRooms.ToListAsync();
+            var hotelRooms = await _context.HotelRooms.Where(x=>x.HotelID==hotelId).ToListAsync();
 
             return hotelRooms;
         }

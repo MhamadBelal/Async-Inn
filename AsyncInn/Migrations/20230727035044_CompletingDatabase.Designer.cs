@@ -3,6 +3,7 @@ using AsyncInn.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsyncInn.Migrations
 {
     [DbContext(typeof(AsyncInnDbContext))]
-    partial class AsyncInnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230727035044_CompletingDatabase")]
+    partial class CompletingDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,15 +193,20 @@ namespace AsyncInn.Migrations
 
             modelBuilder.Entity("AsyncInn.Models.RoomAmenities", b =>
                 {
+                    b.Property<int>("AmenitiesID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
                     b.Property<int>("AmenityID")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomID")
-                        .HasColumnType("int");
+                    b.HasKey("AmenitiesID", "RoomId");
 
-                    b.HasKey("AmenityID", "RoomID");
+                    b.HasIndex("AmenityID");
 
-                    b.HasIndex("RoomID");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("RoomAmenities");
                 });
@@ -232,7 +240,7 @@ namespace AsyncInn.Migrations
 
                     b.HasOne("AsyncInn.Models.Room", "Room")
                         .WithMany("Amenities")
-                        .HasForeignKey("RoomID")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

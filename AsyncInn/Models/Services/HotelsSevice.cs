@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AsyncInn.Models.Services
 {
-    public class HotelsSevice : IbaseRepo<Hotel>
+    public class HotelsSevice : IHotel
     {
         private AsyncInnDbContext _context;
 

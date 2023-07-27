@@ -19,6 +19,7 @@ namespace AsyncInn
             builder.Services.AddTransient<IHotel, HotelsSevice>();
             builder.Services.AddTransient<IRoom, RoomsService>();
             builder.Services.AddTransient<IAmenity, AmenitiesService>();
+            builder.Services.AddTransient<IHotelRoom, HotelRoomRepository>();
 
             string connString = builder.Configuration.GetConnectionString("DefaultConnection");
 

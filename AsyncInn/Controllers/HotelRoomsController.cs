@@ -11,7 +11,7 @@ using AsyncInn.Models.Interfaces;
 
 namespace AsyncInn.Controllers
 {
-    [Route("api/Hotels/{hotelId}/Rooms")]
+    [Route("api/[controller]")]
     [ApiController]
     public class HotelRoomsController : ControllerBase
     {
@@ -23,14 +23,16 @@ namespace AsyncInn.Controllers
         }
 
         // GET: /api/Hotels/{hotelId}/Rooms
-        [HttpGet]
+        [HttpGet("{hotelId}")]
+        [Route("Hotels/{hotelId}/Rooms")]
         public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRooms(int hotelId)
         {
             return await _hotelRoom.GetAll(hotelId);
         }
 
-        // GET: api/HotelRooms/5
+        // GET: api/Hotels/{hotelId}/Rooms/{roomNumber}
         [HttpGet("{id}")]
+        [Route("Hotels/{hotelId}/Rooms/{hotelId}")]
         public async Task<ActionResult<HotelRoom>> GetHotelRoom(int roomId,int hotelId)
         {
             var amenity = await _hotelRoom.GetbyId(roomId, hotelId);
@@ -38,9 +40,10 @@ namespace AsyncInn.Controllers
             return amenity;
         }
 
-        // PUT: api/HotelRooms/5
+        // PUT: api/Hotels/{hotelId}/Rooms/{roomNumber}
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Route("Hotels/{hotelId}/Rooms/{hotelId}")]
         public async Task<IActionResult> PutHotelRoom(int roomId,int hotelId, HotelRoom hotelRoom)
         {
             if (roomId != hotelRoom.RoomID || hotelId!=hotelRoom.HotelID)
@@ -53,19 +56,20 @@ namespace AsyncInn.Controllers
             return Ok(updateHotelRoom);
         }
 
-        // POST: api/HotelRooms
+        // Post: api/Hotels/{hotelId}/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<HotelRoom>> PostHotelRoom(HotelRoom hotelRoom)
+        [Route("Hotels/{hotelId}/Rooms")]
+        public async Task<ActionResult<HotelRoom>> PostHotelRoom(int hotelId,HotelRoom hotelRoom)
         {
-            await _hotelRoom.Create(hotelRoom);
-
-            // Rurtn a 201 Header to Browser or the postmane
-            return CreatedAtAction("GetHotelRoom", new { roomId = hotelRoom.RoomID }, hotelRoom);
+            hotelRoom.HotelID = hotelId;
+            var addedHotelRoom = await _hotelRoom.Create(hotelRoom);
+            return CreatedAtAction(nameof(GetHotelRoom), new { hotelId, roomId = addedHotelRoom.RoomID }, addedHotelRoom);
         }
 
-        // DELETE: api/HotelRooms/5
+        // DELETE: api/Hotels/{hotelId}/Rooms/{roomNumber}
         [HttpDelete("{id}")]
+        [Route("Hotels/{hotelId}/Rooms/{hotelId}")]
         public async Task<IActionResult> DeleteHotelRoom(int roomId,int hotelId)
         {
             await _hotelRoom.Delete(roomId, hotelId);

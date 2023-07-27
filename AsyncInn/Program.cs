@@ -16,9 +16,9 @@ namespace AsyncInn
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllers();
 
-            builder.Services.AddTransient<IbaseRepo<Hotel>, HotelsSevice>();
-            builder.Services.AddTransient<IbaseRepo<Room>, RoomsService>();
-            builder.Services.AddTransient<IbaseRepo<Amenity>, AmenitiesService>();
+            builder.Services.AddTransient<IHotel, HotelsSevice>();
+            builder.Services.AddTransient<IRoom, RoomsService>();
+            builder.Services.AddTransient<IAmenity, AmenitiesService>();
 
             string connString = builder.Configuration.GetConnectionString("DefaultConnection");
 

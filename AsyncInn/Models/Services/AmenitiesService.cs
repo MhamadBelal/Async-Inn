@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AsyncInn.Models.Services
 {
-    public class AmenitiesService : IbaseRepo<Amenity>
+    public class AmenitiesService : IAmenity
     {
         private AsyncInnDbContext _context;
 

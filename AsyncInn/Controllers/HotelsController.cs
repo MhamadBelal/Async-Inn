@@ -15,9 +15,9 @@ namespace AsyncInn.Controllers
     [ApiController]
     public class HotelsController : ControllerBase
     {
-        private readonly IbaseRepo<Hotel> _hotel;
+        private readonly IHotel _hotel;
 
-        public HotelsController(IbaseRepo<Hotel> hotel)
+        public HotelsController(IHotel hotel)
         {
             _hotel = hotel;
         }

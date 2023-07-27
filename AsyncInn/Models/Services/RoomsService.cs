@@ -1,10 +1,11 @@
 ﻿using AsyncInn.Data;
 using AsyncInn.Models.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsyncInn.Models.Services
 {
-    public class RoomsService : IbaseRepo<Room>
+    public class RoomsService : IRoom
     {
         private AsyncInnDbContext _context;
 
@@ -44,6 +45,29 @@ namespace AsyncInn.Models.Services
             _context.Entry(room).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return room;
+        }
+
+        public async Task AddAmenityToRoom(int roomId, int amenityId)
+        {
+            RoomAmenities roomAmenities = new RoomAmenities
+            {
+                RoomID = roomId,
+                AmenityID = amenityId
+            };
+
+            _context.Entry(roomAmenities).State = EntityState.Added;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveAmentityFromRoom(int roomId, int amenityId)
+        {
+            var roomAmenity = await _context.RoomAmenities.FirstOrDefaultAsync(x=>x.RoomID == roomId && x.AmenityID == amenityId);
+
+            _context.Entry(roomAmenity).State = EntityState.Deleted;
+
+            await _context.SaveChangesAsync();
+
         }
     }
 }

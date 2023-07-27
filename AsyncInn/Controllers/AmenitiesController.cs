@@ -15,9 +15,9 @@ namespace AsyncInn.Controllers
     [ApiController]
     public class AmenitiesController : ControllerBase
     {
-        private readonly IbaseRepo<Amenity> _amenity;
+        private readonly IAmenity _amenity;
 
-        public AmenitiesController(IbaseRepo<Amenity> amenity)
+        public AmenitiesController(IAmenity amenity)
         {
             _amenity = amenity;
         }

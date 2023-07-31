@@ -36,7 +36,7 @@ namespace AsyncInn.Models.Services
 
         public async Task<List<Hotel>> GetAll()
         {
-            var hotles = await _context.Hotels.ToListAsync();
+            var hotles = await _context.Hotels.Include(x=>x.HotelRooms).ToListAsync();
 
             return hotles;
         }

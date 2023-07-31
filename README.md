@@ -135,3 +135,26 @@ The Repository Design Pattern is a widely used architectural pattern that helps 
 ### How it is used in the Hotel Management Application:
 
 In the Hotel Management Application, the Repository Design Pattern is employed to handle the data access operations for entities such as Hotel, Amenity, and Room. The pattern is implemented using the IbaseRepo interface, which contains the CRUD (Create, GetAll, GetbyId, Update, Delete) operations that all repositories for different entities must implement. Each entity (Hotel, Amenity, and Room) has its own repository class that implements the IbaseRepo interface, providing specific implementations for interacting with the data source.
+
+---
+
+## Lab14
+
+### RoomAmenities
+1. Add onto your RoomsController the ability to add and remove amenities to a specific room
+ * Routes: POST/DELETE: [Route("{roomId}/Amenity/{amenityId}")]
+ * Add to your IRoom Interface the method signatures to AddAmenityToRoom(int roomId, int amenityId) and RemoveAmentityFromRoom(int roomId, int amenityId)
+ * Add the logic for the above methods into your RoomRepository.cs Service.
+2. Add to your Room.cs, Amenity.cs, and RoomAmenity.cs file the navigation properties that we defined in your ERD.
+3. On the Get() based call in your RoomRepository.cs and your ‘AmenityRepository.cs file, use the Include()` to populate the navigation property details within the return object.
+
+### HotelRoom
+1. Create a new interface named IHotelRoom that contains basic CRUD operations for manipulating a HotelRoom.
+2. Create a service named HotelRoomRepository that implements the IHotelRoom interface. Add the logic for each of the methods to satisfy the CRUD operations on a HotelRoom.
+3. Scaffold out a new HotelRoomController that will inject the IHotelRoomInterface. Update/customize the logic to use the interface instead of the DBContext
+4. Modify the routes of this controller for the following:
+  * GET all the rooms for a hotel: /api/Hotels/{hotelId}/Rooms
+  * POST to add a room to a hotel: /api/Hotels/{hotelId}/Rooms
+  * GET all room details for a specific room: /api/Hotels/{hotelId}/Rooms/{roomNumber}
+  * PUT update the details of a specific room: /api/Hotels/{hotelId}/Rooms/{roomNumber}
+  * DELETE a specific room from a hotel: /api/Hotels/{hotelId}/Rooms/{roomNumber}

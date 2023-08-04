@@ -59,8 +59,9 @@ namespace AsyncInn.Controllers
         public async Task<ActionResult<HotelRoom>> PostHotelRoom(int hotelId,HotelRoom hotelRoom)
         {
             hotelRoom.HotelID = hotelId;
-            var addedHotelRoom = await _hotelRoom.Create(hotelRoom);
-            return CreatedAtAction(nameof(GetHotelRoom), new { hotelId, roomId = addedHotelRoom.RoomID }, addedHotelRoom);
+            var addedHotelRoom = await _hotelRoom.Create(hotelId,hotelRoom);
+            //return CreatedAtAction(nameof(GetHotelRoom), new { hotelId, roomId = addedHotelRoom.RoomID }, addedHotelRoom);
+            return Ok("added successfully!");
         }
 
         // DELETE: api/Hotels/{hotelId}/Rooms/{roomId}

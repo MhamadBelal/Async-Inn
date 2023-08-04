@@ -14,8 +14,16 @@ namespace AsyncInn.Models.Services
         }
 
 
-        public async Task<HotelRoom> Create(HotelRoom hotelRoom)
+        public async Task<HotelRoom> Create(int hotelId, HotelRoom hotelRoom)
         {
+            var room = await _context.Rooms.FindAsync(hotelRoom.RoomID);
+            var hotel = await _context.Hotels.FindAsync(hotelRoom.HotelID);
+
+            hotelRoom.HotelID = hotelId;
+
+            hotelRoom.Room = room;
+            hotelRoom.Hotel = hotel;
+
             _context.HotelRooms.Add(hotelRoom);
             await _context.SaveChangesAsync();
             return hotelRoom;

@@ -3,7 +3,7 @@
     public interface IHotelRoom
     {
         // Create 
-        Task<HotelRoom> Create(HotelRoom hotelRoom);
+        Task<HotelRoom> Create(int hotelId, HotelRoom hotelRoom);
 
         // GET All
         Task<List<HotelRoom>> GetAll(int hotelId);

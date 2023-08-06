@@ -1,19 +1,21 @@
-﻿namespace AsyncInn.Models.Interfaces
+﻿using AsyncInn.Models.DTOs;
+
+namespace AsyncInn.Models.Interfaces
 {
     public interface IAmenity
     {
         // Create 
-        Task<Amenity> Create(Amenity repo);
+        Task<AmenityDTO> Create(AmenityDTO repo);
 
         // GET All
-        Task<List<Amenity>> GetAll();
+        Task<List<AmenityDTO>> GetAll();
 
         // GET By Id
 
-        Task<Amenity> GetbyId(int repoId);
+        Task<AmenityDTO> GetbyId(int repoId);
 
         // Update
-        Task<Amenity> Update(int id, Amenity repo);
+        Task<AmenityDTO> Update(int id, AmenityDTO repo);
 
         // Delete 
 

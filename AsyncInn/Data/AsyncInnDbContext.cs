@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
 using System.Numerics;
+using static AsyncInn.Models.Room;
 
 namespace AsyncInn.Data
 {
@@ -20,9 +21,9 @@ namespace AsyncInn.Data
                 new Hotel { ID = 3, Name = "Green Hotel", StreetAddress = "University Street", City = "Amman", State = "Middle East", Country = "Jordan", Phone = "0791420372" }
                 );
             modelBuilder.Entity<Room>().HasData(
-                new Room { ID=1, Name="Blue Room", Layout=222},
-                new Room { ID = 2, Name = "Red Room", Layout = 222 },
-                new Room { ID = 3, Name = "Green Room", Layout = 222 }
+                new Room { ID=1, Name="Blue Room", Layout= RoomLayout.Studio},
+                new Room { ID = 2, Name = "Red Room", Layout = RoomLayout.TwoBedroom },
+                new Room { ID = 3, Name = "Green Room", Layout = RoomLayout.OneBedroom }
                 );
             modelBuilder.Entity<Amenity>().HasData(
                 new Room { ID = 1, Name = "Blue Amenity" },

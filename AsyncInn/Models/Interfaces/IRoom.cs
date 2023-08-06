@@ -1,19 +1,21 @@
-﻿namespace AsyncInn.Models.Interfaces
+﻿using AsyncInn.Models.DTOs;
+
+namespace AsyncInn.Models.Interfaces
 {
     public interface IRoom
     {
         // Create 
-        Task<Room> Create(Room repo);
+        Task<RoomDTO> Create(RoomDTO repo);
 
         // GET All
-        Task<List<Room>> GetAll();
+        Task<List<RoomDTO>> GetAll();
 
         // GET By Id
 
-        Task<Room> GetbyId(int repoId);
+        Task<RoomDTO> GetbyId(int repoId);
 
         // Update
-        Task<Room> Update(int id, Room repo);
+        Task<RoomDTO> Update(int id, RoomDTO repo);
 
         // Delete 
 

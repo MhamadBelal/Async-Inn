@@ -158,3 +158,174 @@ In the Hotel Management Application, the Repository Design Pattern is employed t
   * GET all room details for a specific room: /api/Hotels/{hotelId}/Rooms/{roomNumber}
   * PUT update the details of a specific room: /api/Hotels/{hotelId}/Rooms/{roomNumber}
   * DELETE a specific room from a hotel: /api/Hotels/{hotelId}/Rooms/{roomNumber}
+
+---
+
+## Lab16
+
+Add onto your current Async Inn application by cleaning up input and outputs of your controllers to be DTOs.
+
+DTOs: DTOs stand for data transfer objects
+
+Amenities,
+Rooms
+HotelRooms
+Hotels
+
+```shell
+    public class HotelDTO
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string StreetAddress { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Phone { get; set; }
+        public List<HotelRoomDTO> Rooms { get; set; }
+    }
+
+
+    public class HotelRoomDTO
+    {
+        public int HotelID { get; set; }
+        public int RoomNumber { get; set; }
+        public decimal Rate { get; set; }
+        public bool PetFriendly { get; set; }
+        public int RoomID { get; set; }
+        public RoomDTO Room { get; set; }
+    }
+
+    public class RoomDTO
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Layout { get; set; }
+        public List<AmenityDTO> Amenities { get; set; }
+    }
+
+    public class AmenityDTO
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
+```
+
+
+In HotelsController, the get method should return:
+
+```shell
+{
+    "id": 1,
+    "name": "My really cool Hotel",
+    "streetAddress": "123 CandyCane Lane",
+    "city": "Seattle",
+    "state": "WA",
+    "phone": "123-456-8798",
+    "rooms": [
+        {
+            "hotelID": 1,
+            "roomNumber": 101,
+            "rate": 75.00,
+            "petFriendly": false,
+            "roomID": 2,
+            "room": {
+                "id": 2,
+                "name": "Queen Suite",
+                "layout": "TwoBedroom",
+                "amenities": [
+                    {
+                        "id": 1,
+                        "name": "Coffee Maker"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Mini Bar"
+                    }
+                ]
+            }
+        },
+        {
+            "hotelID": 1,
+            "roomNumber": 123,
+            "rate": 120.00,
+            "petFriendly": true,
+            "roomID": 1,
+            "room": {
+                "id": 1,
+                "name": "Princess Suite",
+                "layout": "OneBedroom",
+                "amenities": [
+                    {
+                        "id": 1,
+                        "name": "Coffee Maker"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Mini Bar"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+
+
+In HotelRoomsController, the get method should return:
+
+```shell
+{
+    "hotelID": 1,
+    "roomNumber": 101,
+    "rate": 75.00,
+    "petFriendly": false,
+    "roomID": 2,
+    "room": {
+        "id": 2,
+        "name": "Queen Suite",
+        "layout": "TwoBedroom",
+        "amenities": [
+            {
+                "id": 1,
+                "name": "Coffee Maker"
+            },
+            {
+                "id": 2,
+                "name": "Mini Bar"
+            }
+        ]
+    }
+}
+```
+
+
+In RoomsController, the get method should return:
+
+```shell
+{
+    "id": 1,
+    "name": "Princess Suite",
+    "layout": "OneBedroom",
+    "amenities": [
+        {
+            "id": 1,
+            "name": "Coffee Maker"
+        },
+        {
+            "id": 2,
+            "name": "Mini Bar"
+        }
+    ]
+}
+```
+
+In AmenitiesController, the get method should return:
+
+```shell
+{
+    "id": 1,
+    "name": "Coffee Maker"
+}
+```
+
+---

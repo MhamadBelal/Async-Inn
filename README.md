@@ -329,3 +329,30 @@ In AmenitiesController, the get method should return:
 ```
 
 ---
+
+## Lab17
+
+In this lab, I have implemented Xunit testing for my services and controllers, added Swagger documentation for my API, and provided ///summary documentation for all interfaces and services. Xunit testing is a unit testing framework that helps ensure different parts of my code work as expected. Swagger is a tool that generates API documentation, making it easier for me and other developers to understand and consume my API. The ///summary documentation is used to describe the purpose and functionality of interfaces and services in my code, making it more understandable for me and my team.
+
+
+Unit Testing for the Services:
+
+![UnitTesting](./Assets/UnitTesting.PNG)
+
+Swagger Documentation:
+
+
+![Swagger Documentation](./Assets/swaager.PNG)
+
+### Step-by-Step Directions (Happy Path):
+
+1. Xunit Testing for Services and Controllers
+2. Adding Swagger Documentation
+3. Adding ///summary Documentation
+
+
+### Other Relevant Details:
+
+* It's essential to ensure that my Xunit tests cover various scenarios, including both positive and negative cases. This will help me catch potential bugs and ensure my code behaves as expected in different situations.
+* For Swagger documentation, I can customize the generated output further by using XML comments in my code. These comments allow me to provide additional descriptions for my API endpoints, making the documentation even more helpful for me and my team.
+* The ///summary documentation is not just for Swagger but is also useful for providing context to other developers who might work on the project in the future. It serves as a useful reference to understand the purpose and usage of different parts of my codebase.

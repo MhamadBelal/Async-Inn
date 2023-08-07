@@ -13,6 +13,11 @@ namespace AsyncInn.Models.Services
         {
             _context = context;
         }
+        /// <summary>
+        /// To add a Amenity object to the database using AmenityDTO
+        /// </summary>
+        /// <param name="amenity">passing the created Amenity</param>
+        /// <returns>return the created object in AmenityDTO type</returns>
         public async Task<AmenityDTO> Create(AmenityDTO amenity)
         {
             var Amneity = new Amenity
@@ -23,7 +28,11 @@ namespace AsyncInn.Models.Services
             await _context.SaveChangesAsync();
             return amenity;
         }
-
+        /// <summary>
+        /// to delete a specific Amenity object
+        /// </summary>
+        /// <param name="id">passing the id of the amenity that we want</param>
+        /// <returns>nothing</returns>
         public async Task Delete(int id)
         {
             var amenity = await _context.Amenities.FindAsync(id);
@@ -34,6 +43,11 @@ namespace AsyncInn.Models.Services
             }
         }
 
+        /// <summary>
+        /// to get a specific Amenity object
+        /// </summary>
+        /// <param name="amenityId">passing the id of the amenity that we want</param>
+        /// <returns>it return a specific Amenity object in AmenityDTO type</returns>
         public async Task<AmenityDTO> GetbyId(int amenityId)
         {
             var amenity = await _context.Amenities.FindAsync(amenityId);
@@ -48,7 +62,10 @@ namespace AsyncInn.Models.Services
             };
             return Amenity;
         }
-
+        /// <summary>
+        /// to get all the Amenity data from the database
+        /// </summary>
+        /// <returns>it returns all the Amenity data from the database in AmenityDTO type</returns>
         public async Task<List<AmenityDTO>> GetAll()
         {
             var amenity = await _context.Amenities.ToListAsync();
@@ -59,7 +76,12 @@ namespace AsyncInn.Models.Services
             }).ToList();
             return Amenity;
         }
-
+        /// <summary>
+        /// to update a specific Amenity object
+        /// </summary>
+        /// <param name="id">passing the id of the amenity that we want</param>
+        /// <param name="amenity">passing the Editied Amenity object</param>
+        /// <returns>it return the updated amenity object in AmenityDTO type</returns>
         public async Task<AmenityDTO> Update(int id, AmenityDTO amenity)
         {
             var Amenity = await _context.Amenities.FindAsync(id);

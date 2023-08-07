@@ -14,11 +14,16 @@ namespace AsyncInn.Models.Services
             _context = context;
         }
 
-
+        /// <summary>
+        /// To add a HotelRoom object to the database using HotelRoomDTO
+        /// </summary>
+        /// <param name="hotelId">passing the hotel id that I want to make HotelRoom object from</param>
+        /// <param name="hotelRoom">passing the crreated HotelRoom object using HotelRoomDTO type</param>
+        /// <returns>the created HotelRoom object in HotelRoomDTO type</returns>
         public async Task<HotelRoomDTO> Create(int hotelId, HotelRoomDTO hotelRoom)
         {
             var room = await _context.Rooms.FindAsync(hotelRoom.RoomID);
-            var hotel = await _context.Hotels.FindAsync(hotelRoom.HotelID);
+            var hotel = await _context.Hotels.FindAsync(hotelId);
 
             var HotelRoom = new HotelRoom
             {
@@ -26,14 +31,19 @@ namespace AsyncInn.Models.Services
                 RoomID = hotelRoom.RoomID,
                 RoomNumber = hotelRoom.RoomNumber,
                 Rate = hotelRoom.Rate,
-                PetFriendly = hotelRoom.PetFriendly,
+                PetFriendly = hotelRoom.PetFriendly
             };
 
             _context.HotelRooms.Add(HotelRoom);
             await _context.SaveChangesAsync();
             return hotelRoom;
         }
-
+        /// <summary>
+        /// to delete a HotelRoom object from the database
+        /// </summary>
+        /// <param name="roomId">the roomId of the HotelRoom that I want to edit</param>
+        /// <param name="hotelId">the hotelId of the HotelRoom that I want to edit</param>
+        /// <returns>nothing</returns>
         public async Task Delete(int roomId, int hotelId)
         {
             var HotelRoom = await _context.HotelRooms.Where(x=>x.RoomID==roomId && x.HotelID==hotelId).FirstOrDefaultAsync();
@@ -43,7 +53,11 @@ namespace AsyncInn.Models.Services
                 await _context.SaveChangesAsync();
             }
         }
-
+        /// <summary>
+        /// to get all the RoomHotel realted to a specific hotel objects from the database
+        /// </summary>
+        /// <param name="hotelId">the hotel that I want to return all the realted HotelRoom objects</param>
+        /// <returns>all the RoomHotel realted to a specific hotel objects from the database in HotelRoomDTO type</returns>
         public async Task<List<HotelRoomDTO>> GetAll(int hotelId)
         {
             var hotelRoom = await _context.HotelRooms
@@ -74,7 +88,12 @@ namespace AsyncInn.Models.Services
 
             return HotelRoom;
         }
-
+        /// <summary>
+        /// to get a specific HotelRoom object based on roomId and hotelId
+        /// </summary>
+        /// <param name="roomId">the roomId of the HotelRoom</param>
+        /// <param name="hotelId">the hotelId of the HotelRoom</param>
+        /// <returns>a specific HotelRoom object based on roomId and hotelId in HotelRoomDTO type</returns>
         public async Task<HotelRoomDTO> GetbyId(int roomId, int hotelId)
         {
             var hotelRoom = await _context.HotelRooms
@@ -110,7 +129,13 @@ namespace AsyncInn.Models.Services
 
             return HotelRoom;
         }
-
+        /// <summary>
+        /// to modify a specific HotelRoom object based on roomId and hotelId
+        /// </summary>
+        /// <param name="hotelId">the hotelId of the HotelRoom that I want to edit</param>
+        /// <param name="roomId">the roomId of the HotelRoom that I want to edit</param>
+        /// <param name="hotelRoom">the modified object in HotelRoomDTO type</param>
+        /// <returns>the modified object in HotelRoomDTO type</returns>
         public async Task<HotelRoomDTO> Update(int hotelId, int roomId, HotelRoomDTO hotelRoom)
         {
             var HotelRoom = await _context.HotelRooms.Where(x => x.RoomID == roomId && x.HotelID == hotelId).FirstOrDefaultAsync();

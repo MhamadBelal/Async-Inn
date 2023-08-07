@@ -57,7 +57,7 @@ namespace AsyncInn.Controllers
             await _hotel.Create(hotel);
 
             // Rurtn a 201 Header to Browser or the postmane
-            return CreatedAtAction("GetCourse", new { id = hotel.ID }, hotel);
+            return CreatedAtAction(nameof(GetHotel), new { id = hotel.ID }, hotel);
         }
 
         // DELETE: api/Hotels/5
@@ -66,7 +66,7 @@ namespace AsyncInn.Controllers
         {
             await _hotel.Delete(id);
 
-            return NoContent();
+            return Ok("Removed Successfully");
         }
     }
 }

@@ -54,7 +54,7 @@ namespace AsyncInn.Controllers
         [HttpPost("Hotels/{hotelId}/Rooms")]
         public async Task<ActionResult<HotelRoomDTO>> PostHotelRoom(int hotelId, HotelRoomDTO hotelRoom)
         {
-            hotelRoom.HotelID = hotelId;
+           /// hotelRoom.HotelID = hotelId;
             var addedHotelRoom = await _hotelRoom.Create(hotelId,hotelRoom);
             //return CreatedAtAction(nameof(GetHotelRoom), new { hotelId, roomId = addedHotelRoom.RoomID }, addedHotelRoom);
             return Ok("added successfully!");
@@ -67,7 +67,7 @@ namespace AsyncInn.Controllers
         {
             await _hotelRoom.Delete(roomId, hotelId);
 
-            return NoContent();
+            return Ok("Removed Successfully");
         }
 
     }

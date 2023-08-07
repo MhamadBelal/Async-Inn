@@ -29,8 +29,27 @@ namespace AsyncInn
 
             builder.Services.AddDbContext<AsyncInnDbContext>(options=> options.UseSqlServer(connString));
 
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title = "AsyncInn API",
+                    Version = "v1",
+                });
+            });
+
             var app = builder.Build();
 
+            app.UseSwagger(options =>
+            {
+                options.RouteTemplate = "/api/{documentName}/swagger.json";
+            });
+
+            app.UseSwaggerUI(aptions =>
+            {
+                aptions.SwaggerEndpoint("/api/v1/swagger.json", "AsyncInn API");
+                aptions.RoutePrefix = "docs";
+            });
 
             app.MapControllers();
 

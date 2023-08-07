@@ -6,9 +6,9 @@
         public string Name { get; set; }
         public RoomLayout Layout { get; set; }
 
-        public List<RoomAmenities> Amenities { get; set; }
+        public List<RoomAmenities>? Amenities { get; set; }
 
-        public List<HotelRoom> HotelRooms { get; set;}
+        public List<HotelRoom>? HotelRooms { get; set;}
 
         public enum RoomLayout
         {

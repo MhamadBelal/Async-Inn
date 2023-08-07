@@ -356,3 +356,46 @@ Swagger Documentation:
 * It's essential to ensure that my Xunit tests cover various scenarios, including both positive and negative cases. This will help me catch potential bugs and ensure my code behaves as expected in different situations.
 * For Swagger documentation, I can customize the generated output further by using XML comments in my code. These comments allow me to provide additional descriptions for my API endpoints, making the documentation even more helpful for me and my team.
 * The ///summary documentation is not just for Swagger but is also useful for providing context to other developers who might work on the project in the future. It serves as a useful reference to understand the purpose and usage of different parts of my codebase.
+
+
+---
+
+
+## Lab18
+
+In .NET Core, Identity is a membership system that provides built-in support for user authentication, authorization, and user management features in web applications. It simplifies the process of handling user-related tasks, such as user registration, login, password management, and role-based access control.
+
+Identity is typically used in ASP.NET Core web applications to manage user accounts and provide a framework for implementing secure authentication and authorization mechanisms.
+
+**Login Process in Identity:**
+
+1. User Authentication Request: When a user wants to log in, they typically enter their credentials (username/email and password) in a login form and submit it to the server.
+2. Authentication Middleware: In the ASP.NET Core application, the authentication middleware intercepts the incoming login request.
+3. Identity Framework: The authentication middleware uses the Identity framework to handle user authentication. It checks the submitted credentials against the stored user data in the database.
+4. IdentityUserManager: The IdentityUserManager is responsible for managing user-related operations, including authentication. It verifies the user's credentials and determines if the login is successful.
+5. Create Authentication Ticket: If the login credentials are valid, the Identity framework creates an authentication ticket for the user.
+6. User Logged In: The user is now considered logged in, and subsequent requests from the user's browser will include the authentication cookie. This allows the server to identify the user on each request and provide access to restricted resources or actions.
+
+**Register Process in Identity:**
+
+1. User Registration Request: When a user wants to register, they typically fill out a registration form with required details such as username, email, and password.
+2. Registration Form Submission: After the user fills out the registration form, they submit it to the server.
+3. IdentityUserManager: The IdentityUserManager handles the user registration process. It creates a new instance of the custom user model (or the default IdentityUser) and sets the user properties based on the data submitted through the registration form.
+4. Store User Data: The Identity framework stores the user data, including the hashed password, in the database. The password is hashed for security purposes.
+5. User Registered: After the user data is stored successfully, the user is considered registered and can now log in using their credentials.
+
+***The process of Login action:***
+
+![Login and Register Process](./Assets/LoginProcess.jpg)
+
+***Checking that Register is working Correclty:***
+
+![Register Test Request](./Assets/RegisterTestRequest.PNG)
+![Register Test Response](./Assets/RegisterTestResponse.PNG)
+
+***Checking that Login is working Correclty:***
+
+![Login Test Request](./Assets/LoginTestRequest.PNG)
+![Login Test Response](./Assets/LoginTestResponse.PNG)
+
+---

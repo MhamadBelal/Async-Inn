@@ -57,7 +57,7 @@ namespace AsyncInn.Controllers
             await _room.Create(room);
 
             // Rurtn a 201 Header to Browser or the postmane
-            return CreatedAtAction("GetCourse", new { id = room.ID }, room);
+            return CreatedAtAction(nameof(GetRoom), new { id = room.ID }, room);
         }
 
         // DELETE: api/Rooms/5
@@ -66,7 +66,7 @@ namespace AsyncInn.Controllers
         {
             await _room.Delete(id);
 
-            return NoContent();
+            return Ok("removed successfuly");
         }
 
         [HttpPost("{roomId}/Amenity/{amenityId}")]

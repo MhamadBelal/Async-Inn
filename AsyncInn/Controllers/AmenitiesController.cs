@@ -57,7 +57,7 @@ namespace AsyncInn.Controllers
             await _amenity.Create(amenity);
 
             // Rurtn a 201 Header to Browser or the postmane
-            return CreatedAtAction("GetCourse", new { id = amenity.ID }, amenity);
+            return CreatedAtAction(nameof(GetAmenity), new { id = amenity.ID }, amenity);
         }
 
         // DELETE: api/Amenities/5
@@ -66,7 +66,7 @@ namespace AsyncInn.Controllers
         {
             await _amenity.Delete(id);
 
-            return NoContent();
+            return Ok("Removed Successfully");
         }
     }
 }

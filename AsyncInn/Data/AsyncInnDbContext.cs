@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
 using System.Numerics;
@@ -6,7 +7,7 @@ using static AsyncInn.Models.Room;
 
 namespace AsyncInn.Data
 {
-    public class AsyncInnDbContext : DbContext
+    public class AsyncInnDbContext : IdentityDbContext<ApplicationUser>
     {
         public AsyncInnDbContext(DbContextOptions options) : base(options)
         {
@@ -15,6 +16,9 @@ namespace AsyncInn.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Hotel>().HasData(
                 new Hotel { ID = 1, Name="Blue Hotel", StreetAddress="University Street", City="Amman", State="Middle East", Country="Jordan", Phone="0791420372" },
                 new Hotel { ID = 2, Name = "Red Hotel", StreetAddress = "University Street", City = "Amman", State = "Middle East", Country = "Jordan", Phone = "0791420372" },

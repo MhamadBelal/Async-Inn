@@ -48,20 +48,6 @@ namespace AsyncInnTests
             return room;
         }
 
-        
-        public async Task<Amenity> CreateAndSaveTestAmenity()
-        {
-            var amenity = new Amenity()
-            {
-                Name = "Test1"
-            };
-            _db.Amenities.Add(amenity);
-
-            await _db.SaveChangesAsync();
-
-            return amenity;
-        }
-
 
         public async Task<List<Room>> getAllRoomsTest()
         {
@@ -221,12 +207,73 @@ namespace AsyncInnTests
         #endregion
 
 
+
+
+
+        #region Amenity
+
+        public async Task<Amenity> CreateAndSaveTestAmenity()
+        {
+            var amenity = new Amenity()
+            {
+                Name = "Test1"
+            };
+            _db.Amenities.Add(amenity);
+
+            await _db.SaveChangesAsync();
+
+            return amenity;
+        }
+
+        public async Task<List<Amenity>> getAllAmenitiesTest()
+        {
+            var amenity1 = new Amenity
+            {
+                Name = "Test1"
+            };
+
+            var amenity2 = new Amenity
+            {
+                Name = "Test2"
+            };
+
+            var amenity3 = new Amenity
+            {
+                Name = "Test3",
+            };
+
+
+            _db.Amenities.Add(amenity1);
+            _db.Amenities.Add(amenity2);
+            _db.Amenities.Add(amenity3);
+
+            await _db.SaveChangesAsync();
+
+            var Amenities = await _db.Amenities.ToListAsync();
+
+            return Amenities;
+
+        }
+
+        public async Task<Amenity> UpdateAndSaveAmenityTest(int amenityId)
+        {
+            var Amenity = await _db.Amenities.FindAsync(amenityId);
+            if (Amenity != null)
+            {
+                Amenity.Name = "updateTest";
+            }
+            _db.Amenities.Update(Amenity);
+            await _db.SaveChangesAsync();
+            return Amenity;
+        }
+
+
         public void Dispose()
         {
         _db?.Dispose();
 
         _connection?.Dispose();
         }
-
+        #endregion
     }
 }

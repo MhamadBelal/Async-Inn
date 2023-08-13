@@ -9,6 +9,7 @@ using AsyncInn.Data;
 using AsyncInn.Models;
 using AsyncInn.Models.Interfaces;
 using AsyncInn.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AsyncInn.Controllers
 {
@@ -24,6 +25,8 @@ namespace AsyncInn.Controllers
         }
 
         // GET: api/Amenities
+        [Authorize(Roles = "District Manager", Policy = "read")]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
@@ -31,6 +34,8 @@ namespace AsyncInn.Controllers
         }
 
         // GET: api/Amenities/5
+        [Authorize(Roles = "District Manager", Policy = "read")]
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
@@ -41,6 +46,7 @@ namespace AsyncInn.Controllers
 
         // PUT: api/Amenities/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "District Manager", Policy = "update")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAmenity(int id, AmenityDTO amenity)
         {
@@ -51,6 +57,7 @@ namespace AsyncInn.Controllers
 
         // POST: api/Amenities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "District Manager", Policy = "create")]
         [HttpPost]
         public async Task<ActionResult<AmenityDTO>> PostAmenity(AmenityDTO amenity)
         {
@@ -61,6 +68,7 @@ namespace AsyncInn.Controllers
         }
 
         // DELETE: api/Amenities/5
+        [Authorize(Roles = "District Manager", Policy = "delete")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAmenity(int id)
         {

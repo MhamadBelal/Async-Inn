@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
@@ -47,8 +48,61 @@ namespace AsyncInn.Data
                 hotelRoom.HotelID,
                 hotelRoom.RoomID
                 });
+
+
+            SeedRole(modelBuilder, "District Manager", "create", "update", "delete","read");
+            SeedRole(modelBuilder, "Property Manager", "create", "update", "read");
+            SeedRole(modelBuilder, "Agent", "create", "update", "delete", "read");
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+            var districtManagerUser = new ApplicationUser
+            {
+                UserName = "manager1",
+                NormalizedUserName = "MANAGER1",
+                Email = "districtmanager1@example.com",
+                NormalizedEmail = "DISTRICTMANAGER1@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Manager1@123"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            
+            modelBuilder.Entity<ApplicationUser>().HasData(districtManagerUser);
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "District Manager", // Replace with actual role ID
+                    UserId = districtManagerUser.Id
+                });
         }
 
+
+        int nextId = 1;
+        private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
+        {
+            var role = new IdentityRole
+            {
+                Id = roleName.ToLower(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.Empty.ToString()
+            };
+
+            modelBuilder.Entity<IdentityRole>().HasData(role);
+
+            // Go through the permissions list (the params) and seed a new entry for each
+            var roleClaims = permissions.Select(permission =>
+              new IdentityRoleClaim<string>
+              {
+                  Id = nextId++,
+                  RoleId = role.Id,
+                  ClaimType = "permissions", // This matches what we did in Program.cs
+                  ClaimValue = permission
+              }).ToArray();
+
+            modelBuilder.Entity<IdentityRoleClaim<string>>().HasData(roleClaims);
+        }
 
 
         public DbSet<Hotel> Hotels { get; set; }

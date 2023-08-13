@@ -4,6 +4,7 @@ using AsyncInn.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsyncInn.Migrations
 {
     [DbContext(typeof(AsyncInnDbContext))]
-    partial class AsyncInnDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230812224034_seedRoles")]
+    partial class seedRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,17 +126,17 @@ namespace AsyncInn.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e48f6d34-1d9e-4f77-ba55-fca396bc7444",
+                            Id = "56fe2c82-eccd-4bc3-ba1e-7f96e5a10896",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "414a6cf4-e069-42af-b9db-e14a825731ba",
+                            ConcurrencyStamp = "55cddbcc-7c58-41c2-98e6-44e1fb8ddaee",
                             Email = "districtmanager1@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DISTRICTMANAGER1@EXAMPLE.COM",
                             NormalizedUserName = "MANAGER1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGVBEZ27jC5KGGcD8ERJMtmF4r08ZEg9/txkvWLf6PN/Kv/AI13SbDPXI3xsVCPH8g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA/PW/kyffRqlHr1e8DIN+iiBbQVDiU7pkT+KEspgCiFoTy6NqgEcDNlRw9JdFAWdw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c08d6da0-a1fd-4a29-bb56-73330bc615b1",
+                            SecurityStamp = "948c3f01-e1bc-4131-85c9-62a3ecc9fb79",
                             TwoFactorEnabled = false,
                             UserName = "manager1"
                         });
@@ -363,79 +366,58 @@ namespace AsyncInn.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 12,
+                            Id = 9,
                             ClaimType = "permissions",
                             ClaimValue = "create",
                             RoleId = "district manager"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ClaimType = "permissions",
+                            ClaimValue = "update",
+                            RoleId = "district manager"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ClaimType = "permissions",
+                            ClaimValue = "delete",
+                            RoleId = "district manager"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ClaimType = "permissions",
+                            ClaimValue = "create",
+                            RoleId = "property manager"
                         },
                         new
                         {
                             Id = 13,
                             ClaimType = "permissions",
                             ClaimValue = "update",
-                            RoleId = "district manager"
+                            RoleId = "property manager"
                         },
                         new
                         {
                             Id = 14,
                             ClaimType = "permissions",
-                            ClaimValue = "delete",
-                            RoleId = "district manager"
+                            ClaimValue = "create",
+                            RoleId = "agent"
                         },
                         new
                         {
                             Id = 15,
                             ClaimType = "permissions",
-                            ClaimValue = "read",
-                            RoleId = "district manager"
+                            ClaimValue = "update",
+                            RoleId = "agent"
                         },
                         new
                         {
                             Id = 16,
                             ClaimType = "permissions",
-                            ClaimValue = "create",
-                            RoleId = "property manager"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            ClaimType = "permissions",
-                            ClaimValue = "update",
-                            RoleId = "property manager"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            ClaimType = "permissions",
-                            ClaimValue = "read",
-                            RoleId = "property manager"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            ClaimType = "permissions",
-                            ClaimValue = "create",
-                            RoleId = "agent"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            ClaimType = "permissions",
-                            ClaimValue = "update",
-                            RoleId = "agent"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            ClaimType = "permissions",
                             ClaimValue = "delete",
-                            RoleId = "agent"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            ClaimType = "permissions",
-                            ClaimValue = "read",
                             RoleId = "agent"
                         });
                 });
@@ -504,7 +486,7 @@ namespace AsyncInn.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "e48f6d34-1d9e-4f77-ba55-fca396bc7444",
+                            UserId = "56fe2c82-eccd-4bc3-ba1e-7f96e5a10896",
                             RoleId = "District Manager"
                         });
                 });

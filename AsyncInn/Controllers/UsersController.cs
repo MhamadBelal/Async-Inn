@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Models.DTOs;
 using AsyncInn.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ namespace AsyncInn.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult<UserDto>> Register(RegisterUserDto data)
         {
-            var user = await userService.Register(data, this.ModelState);
+            var user = await userService.Register(data, this.ModelState, this.User);
 
             if (ModelState.IsValid)
             {
@@ -40,5 +41,17 @@ namespace AsyncInn.Controllers
             }
             return user;
         }
+
+
+        [Authorize(Roles = "District Manager,Property Manager,Agent", Policy = "read")]
+        [AllowAnonymous]
+        [HttpGet("Profile")]
+        public async Task<ActionResult<UserDto>> Profile()
+        {
+            return await userService.GetUser(this.User);
+        }
+
+
+
     }
 }

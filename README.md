@@ -399,3 +399,49 @@ Identity is typically used in ASP.NET Core web applications to manage user accou
 ![Login Test Response](./Assets/LoginTestResponse.PNG)
 
 ---
+
+## Roles, Claims, and JWT Tokens
+
+Understanding "Roles, Claims, and JWT Tokens" is crucial in software development for security, access control, and efficient data exchange. JWT Tokens enable secure transmission of information, while Roles determine user permissions and Claims offer contextual details. This knowledge ensures secure systems, proper authorization, and streamlined communication.
+
+here in Application Specifications:
+
+Add 3 new roles to your application with the following permissions:
+
+1. District Manager
+* District manager can do full CRUD operations on all Hotel, HotelRoom, Room, and Amenity entities.
+* The district manager can create accounts for all other roles
+
+
+2. Property Manager
+* Property Manager’s can add/update/read new HotelRooms to hotels, and amenities to rooms. A property manager cannot create new room entities or hotel entities.
+* The property manager can only create accounts for Agents
+
+
+3. Agent
+* An agent can only update/read a HotelRoom and add/delete amenities to rooms
+
+4. Anonymous users
+* anonymous users can only view all GET routes
+
+
+All routes should be locked down to Authorize. Override the [AllowAnonymous]on the appropriate routes for anonymous users.
+
+
+### going throw the system:
+- In every login or register, you will get a token.
+- Use this token to make requests that need to be Authorized like Create,Update,Delete services.
+- Then, you will get the response.
+
+
+***In this example, I want to register an Agent using my accout that have district manager role:***
+
+1. First, I have login with my district manager account that I have seed it to database using migration.
+2. Then, I have got the token that I need to be Authorized.
+3. Then, go to postman tool and request the Register method and add the body with role __Agent__ to see the result like the following:
+
+![PostmanToken](./Assets/PostmanToken.PNG)
+![PostmanToken](./Assets/BodyRequest.PNG)
+![PostmanToken](./Assets/Response.PNG)
+
+---
